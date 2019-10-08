@@ -7,8 +7,9 @@ public class OrderGroupingComparator extends WritableComparator {
     protected OrderGroupingComparator(){
         super(OrderBean.class,true);
     }
+
     @Override
-    public int compare(Object a, Object b) {
+    public int compare(WritableComparable a, WritableComparable b) {
         OrderBean aBean = (OrderBean) a;
         OrderBean bBean = (OrderBean) b;
 

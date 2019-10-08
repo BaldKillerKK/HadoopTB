@@ -9,6 +9,12 @@ import java.util.Iterator;
 public class GroupingReducer extends Reducer<OrderBean, NullWritable,OrderBean, NullWritable> {
     @Override
     protected void reduce(OrderBean key, Iterable<NullWritable> values, Context context) throws IOException, InterruptedException {
-        context.write(key,NullWritable.get());
+        Iterator<NullWritable> iterator = values.iterator();
+
+        for (int i = 0; i < 1; i++) {
+            if (iterator.hasNext()){
+                context.write(key,iterator.next());
+            }
+        }
     }
 }
