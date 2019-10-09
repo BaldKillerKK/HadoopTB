@@ -12,6 +12,11 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
 
+/*
+*   需求：过滤log文件，包含wisdom的字段输出到wisdom.log中，其他的输出到other.log中
+*
+*
+* */
 public class MyRecordWriter extends RecordWriter<LongWritable, Text> {
     private FSDataOutputStream atguigu;
     private FSDataOutputStream other;
@@ -27,7 +32,7 @@ public class MyRecordWriter extends RecordWriter<LongWritable, Text> {
         FileSystem fileSystem = FileSystem.get(job.getConfiguration());
 
         // 将流开到输出文件夹里面
-        atguigu = fileSystem.create(new Path(outdir + "/atguigu.log"));
+        atguigu = fileSystem.create(new Path(outdir + "/wisdom.log"));
         other = fileSystem.create(new Path(outdir + "/other.log"));
     }
 
@@ -42,7 +47,7 @@ public class MyRecordWriter extends RecordWriter<LongWritable, Text> {
     @Override
     public void write(LongWritable key, Text value) throws IOException, InterruptedException {
         String out = value.toString() + "\n";
-        if (out.contains("atguigu")) {
+        if (out.contains("wisdom")) {
             atguigu.write(out.getBytes());
         } else {
             other.write(out.getBytes());
