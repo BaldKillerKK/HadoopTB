@@ -8,6 +8,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 import java.io.IOException;
 
+
 public class OutputDriver {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException, IOException {
         Job job = Job.getInstance(new Configuration());
